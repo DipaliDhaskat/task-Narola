@@ -50,10 +50,15 @@ export const StudentForm = () => {
     }
     const handlePercentage = (e) => {
         const { name, value } = e.target
+
+        if (e.target.value > 100) {
+            console.log("its not valid")
+        }
         setPercentage({
             ...percentage,
             [name]: value
         })
+
 
     }
     const handleSubmit = (event) => {
@@ -121,13 +126,18 @@ export const StudentForm = () => {
                                         {std.id < currentStandard && (
                                             <Grid container spacing={1} sx={{ my: 1 }} key={std.id}>
                                                 <Grid item xs={4} sx={{ margin: "auto" }} >
-                                                    <label>Standred {std.name}</label>
+                                                    <label>Standard  {std.name}</label>
                                                 </Grid>
                                                 <Grid item xs={4}>
-                                                    <TextField type="text" name={std.name} placeholder="Remark" label="Remark" variant="outlined" onChange={handleRemark} fullWidth required aria-required />
+                                                    <TextField type="text" name={std.name} placeholder="Remark" label="Remark" variant="outlined" onChange={handleRemark}
+                                                        fullWidth required aria-required
+
+                                                    />
                                                 </Grid>
                                                 <Grid item xs={4}>
-                                                    <TextField type="number" name={std.name} placeholder="Percentage" label="Percentage" variant="outlined" onChange={handlePercentage} fullWidth required aria-required />
+                                                    <TextField type="number" name={std.name} placeholder="Percentage" label="Percentage" variant="outlined" onChange={handlePercentage} fullWidth
+                                                        InputProps={{ inputProps: { min: 0, max: 100 } }}
+                                                        required aria-required />
                                                 </Grid>
                                             </Grid>
                                         )

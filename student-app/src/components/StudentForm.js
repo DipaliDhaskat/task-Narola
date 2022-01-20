@@ -2,64 +2,56 @@ import React, { useState } from 'react'
 import { Grid, TextField, Button, Card, CardContent, Typography } from '@mui/material';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
 import standardData from '../model/StandardData.json';
-
 
 export const StudentForm = () => {
 
-    const [studetInfo, setStudentInfo] = useState([])
+    const [studetInfo, setStudentInfo] = useState([]);
     const [flag, setFlag] = useState(0);
     const [currentStandard, setCurrentStandard] = useState("");
     const [remarks, setRemarks] = useState([])
-    const [percentage, setPercentage] = useState([])
-    const [error, setError] = useState({ name: "", rollNumber: "", email: "" })
+    const [percentage, setPercentage] = useState([]);
+    const [error, setError] = useState({ name: "", rollNumber: "", email: "" });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value } = e.target
+        const { name, value } = e.target;
         setStudentInfo({
             ...studetInfo,
             [name]: value
         })
         e.target.name === "name" &&
             ((!(/^[a-zA-Z]*$/g.test(e.target.value))) ?
-                setError({ name: "Please enter only alphabets" })
+                setError({ name: "Please enter only alphabets" })   //validation for name
                 : setError({ name: "" }))
 
         e.target.name === "rollNumber" &&
             ((!(/^[0-9]*$/g.test(e.target.value))) ?
-                setError({ rollNumber: "Please enter only numbers" })
+                setError({ rollNumber: "Please enter only numbers" })  //validation for rollNumber
                 : setError({ rollNumber: "" }))
 
         e.target.name === "email" && (
-            ((!(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)))) ?
+            ((!(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)))) ?      //validation for email
                 setError({ email: "Please enter valid email address" })
                 : setError({ email: "" }))
     }
     const onChangeCurrentStandard = (e) => {
-        setCurrentStandard(e.target.value)
-        setFlag(1)
+        setCurrentStandard(e.target.value);
+        setFlag(1);
     }
     const handleRemark = (e) => {
-        const { name, value } = e.target
+        const { name, value } = e.target;
         setRemarks({
             ...remarks,
             [name]: value
         })
     }
     const handlePercentage = (e) => {
-        const { name, value } = e.target
-
-        if (e.target.value > 100) {
-            console.log("its not valid")
-        }
+        const { name, value } = e.target;
         setPercentage({
             ...percentage,
             [name]: value
         })
-
-
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -131,7 +123,6 @@ export const StudentForm = () => {
                                                 <Grid item xs={4}>
                                                     <TextField type="text" name={std.name} placeholder="Remark" label="Remark" variant="outlined" onChange={handleRemark}
                                                         fullWidth required aria-required
-
                                                     />
                                                 </Grid>
                                                 <Grid item xs={4}>

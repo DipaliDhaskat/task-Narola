@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@mui/material';
-import { Card, CardContent, Typography, CardMedia } from '@mui/material';
-
+import { Card, CardContent, Typography } from '@mui/material';
 import Swal from 'sweetalert2'
 import standardData from '../model/StandardData.json';
 
@@ -14,14 +13,13 @@ export const StudentDetails = () => {
         location.state === null && navigate("/");
         location.state !== null && Swal.fire({
             icon: 'success',
-            title: `${location.state?.studetInfo?.name} is successfully register`,
+            title: `${location.state?.studetInfo?.name} is successfully registered`,
             html:
                 `Roll Number is <b> ${location.state?.studetInfo?.rollNumber}</b> <br />` +
                 `Email Id is  <b> ${location.state?.studetInfo?.email}</b> `,
 
             showConfirmButton: true,
         })
-        console.log(location.state.percentage[`1st%`])
     }, [location.state])
     return <div style={{ padding: "auto 5px", marginTop: "60px" }}>
 
